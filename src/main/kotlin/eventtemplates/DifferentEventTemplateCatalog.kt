@@ -47,6 +47,14 @@ class DifferentEventTemplateCatalog : EventTemplateCatalog {
                             return childEventTemplate
                         }
 
+                        "PSORIASIS" -> {
+                            val psoriasisEventTemplate = PsoriasisEventTemplateCatalog().getEventTemplate(maxDuration)
+                            if (psoriasisEventTemplate != null) {
+                                psoriasisEventTemplate.name = eventTemplate.name + ":" + psoriasisEventTemplate.name
+                            }
+                            return psoriasisEventTemplate
+                        }
+
                         "BACK" -> {
                             val backEventTemplate = BackEventTemplateCatalog().getEventTemplate(maxDuration)
                             if (backEventTemplate != null) {
