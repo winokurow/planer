@@ -1,0 +1,5 @@
+"Name","Begin Time","End Time","Weights"
+"Работа","07:00","16:00","STUDY:30;NECESSARY:30"
+"resident evil","16:00","16:30","LEISURE:30"
+"Ужин","16:30","17:30","FAMILY:20"
+"Нескучный вечер","17:30","21:45","LEISURE:180;PEOPLE:180;NECESSARY:180"

@@ -1,0 +1,5 @@
+"Name","Start Time","End Time","models.Category","Weight"
+"завтрак","07:00","07:45","FAMILY:10"
+"магазин","07:45","10:00","NECESSARY:120"
+"обед","12:00","12:45","FAMILY:20"
+"Ужин","17:15","18:00","FAMILY:20"
