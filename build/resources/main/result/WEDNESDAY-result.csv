@@ -1,2 +1,4 @@
 "Name","Begin Time","End Time","Weights"
-"Целый день позитивное настроение","07:00","21:45","DIFFERENT:500;LEISURE:240;NECESSARY:30;SPORT:120;STUDY:15;HYGIENE:20;CLEAN:15;FAMILY:180;PEOPLE:30"
+"Работа","07:00","17:30","STUDY:30;PEOPLE:45;SPORT:20"
+"Ужин","17:30","18:30","FAMILY:40"
+"В кино","18:30","21:45","FAMILY:150;PEOPLE:150;LEISURE:150"

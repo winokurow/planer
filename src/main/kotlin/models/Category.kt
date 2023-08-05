@@ -3,7 +3,7 @@ package models
 import eventtemplates.*
 
 enum class Category(val coefficient: Double) {
-    LEISURE(0.5) {
+    LEISURE(0.4) {
         override fun createImplementation(): EventTemplateCatalog {
             return LeisureEventTemplateCatalog()
         }
@@ -23,7 +23,7 @@ enum class Category(val coefficient: Double) {
             return StudyEventTemplateCatalog()
         }
     },
-    DIFFERENT(0.1) {
+    DIFFERENT(0.2) {
         override fun createImplementation(): EventTemplateCatalog {
             return DifferentEventTemplateCatalog()
         }
@@ -33,12 +33,12 @@ enum class Category(val coefficient: Double) {
             return HygieneEventTemplateCatalog()
         }
     },
-    CLEAN(0.08) {
+    CLEAN(0.05) {
         override fun createImplementation(): EventTemplateCatalog {
             return CleanEventTemplateCatalog()
         }
     },
-    FAMILY(0.02) {
+    FAMILY(0.05) {
         override fun createImplementation(): EventTemplateCatalog {
             return FamilyEventTemplateCatalog()
         }

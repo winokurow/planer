@@ -1,3 +1,4 @@
 "Name","Start Time","End Time","models.Category","Weight"
-"Работа","07:00","17:30","STUDY:30;PEOPLE:30;SPORT:20"
-"Ужин","17:30","18:15","FAMILY:20"
+"Работа","07:00","17:30","STUDY:30;PEOPLE:45;SPORT:20"
+"Ужин","17:30","18:30","FAMILY:40"
+"В кино","18:30","21:45","FAMILY:150;PEOPLE:150;LEISURE:150"

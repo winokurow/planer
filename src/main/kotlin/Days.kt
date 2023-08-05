@@ -12,6 +12,7 @@ class Days {
     fun readMandatoryEvents(): EnumMap<DayOfWeek, MutableList<Event>> {
         val days: EnumMap<DayOfWeek, MutableList<Event>> = EnumMap(DayOfWeek::class.java)
         for (dayOfWeek in enumValues<DayOfWeek>()) {
+            println(dayOfWeek)
             val fileName = "$dayOfWeek-mandatory.csv"
             val events = readEventsFromCSV(fileName)
             days[dayOfWeek] = events

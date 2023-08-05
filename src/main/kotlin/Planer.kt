@@ -1,4 +1,5 @@
 import com.opencsv.CSVWriter
+import eventtemplates.MandatoryEventTemplateCatalog
 import models.Category
 import models.DayOfWeek
 import models.EventTemplate
@@ -14,6 +15,7 @@ import kotlin.system.exitProcess
 class Planer {
 
     private val days = Days()
+    private val mandatoryEventTemplateCatalog = MandatoryEventTemplateCatalog()
     private var mandatoryEventMap: EnumMap<DayOfWeek, MutableList<Event>> = EnumMap(DayOfWeek::class.java)
     private var optionalEventMap: EnumMap<DayOfWeek, MutableList<Event>> = EnumMap(DayOfWeek::class.java)
     private val weights: EnumMap<Category, Int> = EnumMap(Category::class.java)
@@ -142,8 +144,12 @@ class Planer {
     }
 
     private fun findAndAddEvent(category: Category, gapBeginTime: LocalTime, gapEndTime: LocalTime): EventTemplate? {
-
-        return category.createImplementation().getEventTemplate(Duration.between(gapBeginTime, gapEndTime))
+        val duration = Duration.between(gapBeginTime, gapEndTime)
+        var eventTemplate = mandatoryEventTemplateCatalog.getEventTemplate(category, duration)
+        if (eventTemplate == null) {
+            eventTemplate = category.createImplementation().getEventTemplate(duration)
+        }
+        return eventTemplate
     }
 
     private fun findOptionalEvent(
@@ -154,7 +160,6 @@ class Planer {
     ): Event? {
         val events = optionalEventMap[day]
         return events?.firstOrNull { it.beginTime >= gapBeginTime && it.endTime <= gapEndTime && it.weights.any { it.category == category } }
-
     }
 
     private fun addToWeights(additionalWeights: List<WeightObject>) {
@@ -169,7 +174,7 @@ class Planer {
         for (dayOfWeek in enumValues<DayOfWeek>()) {
             println("Output Day $dayOfWeek")
             val fileName = "$dayOfWeek-result.csv"
-            var events = mandatoryEventMap[dayOfWeek]?.sortedBy { it.beginTime }?.toMutableList()
+            val events = mandatoryEventMap[dayOfWeek]?.sortedBy { it.beginTime }?.toMutableList()
             writeResultToCSV(fileName, events)
         }
     }

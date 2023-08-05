@@ -6,9 +6,8 @@ import models.EventTemplate
 import models.WeightObject
 import java.io.FileReader
 import java.time.Duration
-import kotlin.random.Random
 
-class BoardgamesEventTemplateCatalog : EventTemplateCatalog {
+class MandatoryEventTemplateCatalog {
 
 
     private val eventTemplateList = mutableListOf<EventTemplate>()
@@ -17,28 +16,17 @@ class BoardgamesEventTemplateCatalog : EventTemplateCatalog {
         readEventTemplatesFromCSV()
     }
 
-    override fun getEventTemplate(maxDuration: Duration): EventTemplate? {
-        val filteredEventTemplateList = eventTemplateList.filter { eventTemplate ->
-            eventTemplate.duration <= maxDuration
+    fun getEventTemplate(category: Category, maxDuration: Duration): EventTemplate? {
+        var eventTemplate: EventTemplate? = null
+        if (eventTemplateList[0].duration <= maxDuration && eventTemplateList[0].weights.any { it.category == category }) {
+            eventTemplate = eventTemplateList[0]
+            eventTemplateList.removeAt(0)
         }
-        val totalWeight = filteredEventTemplateList.sumOf { it.weight }
-        if (totalWeight > 0) {
-            val randomNumber = Random.nextInt(totalWeight)
-
-            var cumulativeWeight = 0
-            for (eventTemplate in filteredEventTemplateList) {
-                cumulativeWeight += eventTemplate.weight
-                if (randomNumber < cumulativeWeight) {
-                    println(eventTemplate)
-                    return eventTemplate
-                }
-            }
-        }
-        return null
+        return eventTemplate
     }
 
     private fun readEventTemplatesFromCSV() {
-        val filePath = "src/main/resources/eventTemplates/boardgames.csv"
+        val filePath = "src/main/resources/week/mandatory-events.csv"
         val reader = CSVReader(FileReader(filePath))
         val lines = reader.readAll()
         reader.close()
